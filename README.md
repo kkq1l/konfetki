@@ -1,5 +1,4 @@
 ## konfetki
-<img src="https://cdn.discordapp.com/attachments/712502191814082580/812280266314743878/58dbad88ea8ce0dc.png">
 
 
 ## Название игры
@@ -10,6 +9,8 @@
 
 ## Визуальный стиль
 2D, пиксельная графика 
+<img src="https://cdn.discordapp.com/attachments/712502191814082580/812280266314743878/58dbad88ea8ce0dc.png">
+
 
 ## Среда разработки
 SFML, C++
