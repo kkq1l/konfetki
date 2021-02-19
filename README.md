@@ -1,5 +1,5 @@
 ## konfetki
-<img src="https://cdn.discordapp.com/attachments/712502191814082580/812280266314743878/58dbad88ea8ce0dc.png" width="100px;">
+<img src="https://cdn.discordapp.com/attachments/712502191814082580/812280266314743878/58dbad88ea8ce0dc.png">
 
 
 ## Название игры
