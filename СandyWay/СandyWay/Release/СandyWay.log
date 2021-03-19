@@ -1,37 +1,37 @@
 ﻿  Game.cpp
   main.cpp
   Player.cpp
-C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(105,41): warning C4244: +=: преобразование "double" в "T", возможна потеря данных
+D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(105,41): warning C4244: +=: преобразование "double" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(152,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(152,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(153,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(153,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(165,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(165,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(166,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(166,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(181,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(181,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(182,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(182,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
@@ -40,7 +40,7 @@ C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(182,35): warning C4244
   TileMap.cpp
   Создание кода
   Previous IPDB not found, fall back to full compilation.
-C:\Users\User\source\repos\СandyWay\СandyWay\Player.cpp(64): warning C4172: возвращение адреса локальной или временной переменной : anim_switch
+D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(64): warning C4172: возвращение адреса локальной или временной переменной : anim_switch
   All 116 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Создание кода завершено
-  СandyWay.vcxproj -> C:\Users\User\source\repos\СandyWay\Release\СandyWay.exe
+  СandyWay.vcxproj -> D:\stud\pd\konfetki\СandyWay\Release\СandyWay.exe
