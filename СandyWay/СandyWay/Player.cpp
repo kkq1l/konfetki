@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
+#include "Game.h"
 
 void Player::initVariables()
 {
@@ -118,6 +119,7 @@ void Player::updatePhysics()
 	this->sprite.move(this->velocity);
 }
 
+
 void Player::updateMovement()
 {
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
@@ -136,6 +138,7 @@ void Player::updateMovement()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) 
 	{
 		this->sprite.move(0.f, -1.f);
+
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) 
 	{
@@ -204,11 +207,4 @@ void Player::update()
 void Player::render(sf::RenderTarget& target)
 {
 	target.draw(this->sprite);
-
-	/*sf::CircleShape circ;
-	circ.setFillColor(sf::Color::Red);
-	circ.setRadius(2.f);
-	circ.setPosition(this->sprite.getPosition());
-
-	target.draw(circ);*/
 }

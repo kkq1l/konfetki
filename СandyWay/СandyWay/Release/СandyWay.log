@@ -1,46 +1,7 @@
 ﻿  Game.cpp
-  main.cpp
-  Player.cpp
-D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(105,41): warning C4244: +=: преобразование "double" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(152,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(153,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(165,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(166,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(181,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(182,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
-          with
-          [
-              T=int
-          ]
-  Tile.cpp
-  TileMap.cpp
   Создание кода
-  Previous IPDB not found, fall back to full compilation.
-D:\stud\pd\konfetki\СandyWay\СandyWay\Player.cpp(64): warning C4172: возвращение адреса локальной или временной переменной : anim_switch
-  All 116 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 121 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   СandyWay.vcxproj -> D:\stud\pd\konfetki\СandyWay\Release\СandyWay.exe
