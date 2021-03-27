@@ -51,3 +51,11 @@ PC
      <td align="center"><a href="https://github.com/kkq1l"><img src="https://cdn.discordapp.com/avatars/397927444826423308/96ed6b2c9f614bf7751b8e8d5e015367.png?size=256" width="100px;"><br /><sub><b>Киров В.</b></sub></a><br/></td>
   </tr>
 </table>
+
+
+- [ ] Камера
+- [ ] Прототип Боевки
+- [ ] Убрать консоль
+- [ ] решить проблему [вид сверху / вид с боку]
+- [ ] tagged build
+- [ ] HUD
