@@ -6,11 +6,11 @@
 #include "Game.h"
 
 
+#include <windows.h>
 
 using namespace std;
 
-int main()
-{
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	srand(static_cast<unsigned>(time(0)));
 	Game game;
 
