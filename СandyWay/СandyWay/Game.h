@@ -26,7 +26,7 @@ public:
 	Game();
 	virtual ~Game();
 
-
+	void updateHealth();//test
 	void updatePlayer();
 	void updateCollision();
 	void update();

@@ -1,8 +1,10 @@
 #include "Game.h"
+#include "Hud.h"
 using namespace sf;
 
 bool isMenu = 1;
 float x, y = 0;
+Hud lifeBarPlayer;//test
 void Game::initWindow()
 {
 	this->window.create(sf::VideoMode(1136, 668), "CandyWay", sf::Style::Close | sf::Style::Titlebar);
@@ -21,6 +23,7 @@ Game::Game()
 {
 	this->initWindow();
 	this->initPlayer();
+	lifeBarPlayer.update(50);//test
 }
 
 Game::~Game()
@@ -29,6 +32,11 @@ Game::~Game()
 }
 
 
+//test
+void Game::updateHealth()
+{
+	lifeBarPlayer.draw(window);
+}
 
 void Game::updatePlayer()
 {
@@ -132,7 +140,7 @@ void Game::render()
 	this->window.clear();
 
 	this->renderPlayer();
-
+	this->updateHealth(); //test
 	this->window.display();
 }
 
