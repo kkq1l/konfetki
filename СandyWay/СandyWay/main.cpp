@@ -4,13 +4,12 @@
 #include<iostream>
 #include<time.h>
 #include "Game.h"
-
-
-#include <windows.h>
+#include <windows.h> 
 
 using namespace std;
-
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+//int main() //Dlya Debuga
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) //Dlya Releasa  
+{ 
 	srand(static_cast<unsigned>(time(0)));
 	Game game;
 
