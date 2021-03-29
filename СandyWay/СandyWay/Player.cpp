@@ -6,6 +6,8 @@
 void Player::initVariables()
 {
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
+	this->hpMax = 100;
+	this->hp = this->hpMax;
 }
 
 void Player::initTexture()
@@ -75,6 +77,16 @@ const sf::FloatRect Player::getGlobalBounds() const
 	return this->sprite.getGlobalBounds();
 }
 
+const int& Player::getHp() const
+{
+	return this->hp;
+}
+
+const int& Player::getHpMax() const
+{
+	return this->hpMax;
+}
+
 void Player::setPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
@@ -83,6 +95,24 @@ void Player::setPosition(const float x, const float y)
 void Player::resetVelocityY()
 {
 	this->velocity.y = 0.f;
+}
+
+void Player::setHp(const int hp)
+{
+	this->hp = hp;
+}
+
+void Player::loseHp(const int value)
+{
+	this->hp -= value;
+	if (this->hp < 0) {
+		this->hp = 0;
+		std::cout << hp << std::endl;
+	}
+	else {
+
+		std::cout << hp << std::endl;
+	}
 }
 
 
@@ -145,6 +175,7 @@ void Player::updateMovement()
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) 
 	{
 		this->sprite.move(0.f, 1.f);
+		this->loseHp(5);
 	}
 }
 

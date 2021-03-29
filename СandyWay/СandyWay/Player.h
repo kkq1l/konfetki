@@ -10,7 +10,8 @@ private:
 	sf::Texture textureSheet;
 	sf::Clock animationTimer;
 
-	sf::RectangleShape hp;
+	int hp;
+	int hpMax;
 
 	//Animation
 	short animState;
@@ -43,8 +44,16 @@ public:
 	const sf::Vector2f getPosition() const;
 	const sf::FloatRect getGlobalBounds() const;
 
+	const int& getHp() const;
+	const int& getHpMax() const;
+
 	void setPosition(const float x, const float y);
 	void resetVelocityY();
+
+
+	void setHp(const int hp);
+	void loseHp(const int value);
+
 
 	void resetAnimationTimer();
 	void move(const float dir_x, const float dir_y);

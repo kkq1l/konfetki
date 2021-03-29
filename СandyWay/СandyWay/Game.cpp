@@ -1,5 +1,8 @@
 #include "Game.h"
 #include "Hud.h"
+#include<map>
+#include<string>
+#include<sstream>
 using namespace sf;
 
 bool isMenu = 1;
@@ -23,7 +26,8 @@ Game::Game()
 {
 	this->initWindow();
 	this->initPlayer();
-	lifeBarPlayer.update(player->playerHPcheck);//test
+	this->initGUI();
+	lifeBarPlayer.update(player->getHp());//test
 }
 
 Game::~Game()
@@ -32,9 +36,12 @@ Game::~Game()
 }
 
 
+
+
 //test
 void Game::updateHealth()
 {
+	lifeBarPlayer.update(player->getHp());
 	lifeBarPlayer.draw(window);
 }
 
@@ -54,7 +61,20 @@ void Game::updateCollision()
 		);
 	}
 }
+void Game::initGUI()
+{
+	font.loadFromFile("Fonts/PixellettersFull.ttf");
+	if (!this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
+		std::cout << "ERROR::GAME::Failed to load font" << "\n";
 
+	this->gameOverText.setFont(this->font);
+	this->gameOverText.setCharacterSize(60);
+	this->gameOverText.setFillColor(sf::Color::Red);
+	this->gameOverText.setString("Game Over!");
+	this->gameOverText.setPosition(
+		this->window.getSize().x / 2.f - this->gameOverText.getGlobalBounds().width / 22.f,
+		this->window.getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 22.f);
+}
 void Game::update()
 {
 	Texture menuTexture0, menuTexture1, menuTexture2, menuTexture3, aboutTexture;
@@ -125,7 +145,6 @@ void Game::update()
 		}
 
 		this->updatePlayer();
-
 		this->updateCollision();
 	}
 }
@@ -138,7 +157,8 @@ void Game::renderPlayer()
 void Game::render()
 {
 	this->window.clear();
-
+	if (this->player->getHp() <= 0)
+		this->window.draw(this->gameOverText);
 	this->renderPlayer();
 	this->updateHealth(); //test
 	this->window.display();
