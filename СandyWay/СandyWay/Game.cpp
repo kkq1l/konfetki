@@ -23,7 +23,7 @@ Game::Game()
 {
 	this->initWindow();
 	this->initPlayer();
-	lifeBarPlayer.update(50);//test
+	lifeBarPlayer.update(player->playerHPcheck);//test
 }
 
 Game::~Game()

@@ -1,11 +1,5 @@
 #pragma once
-
-
-#include <SFML\System.hpp>
-#include <SFML\Audio.hpp>
-#include <SFML\Graphics.hpp>
-#include <SFML\Window.hpp>
-#include <SFML\Network.hpp>
+#include "Header.h"
 
 enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING };
 
@@ -15,6 +9,8 @@ private:
 	sf::Sprite sprite;
 	sf::Texture textureSheet;
 	sf::Clock animationTimer;
+
+	sf::RectangleShape hp;
 
 	//Animation
 	short animState;
@@ -29,6 +25,7 @@ private:
 	float drag;
 	float gravity;
 	float velocityMaxY;
+	
 
 	//Core
 
@@ -48,8 +45,6 @@ public:
 
 	void setPosition(const float x, const float y);
 	void resetVelocityY();
-
-
 
 	void resetAnimationTimer();
 	void move(const float dir_x, const float dir_y);
