@@ -168,6 +168,7 @@ void Player::updateMovement()
 		this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
 		view.setCenter(getPosition().x, getPosition().y);//тестовая камера
 		
+		
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) 

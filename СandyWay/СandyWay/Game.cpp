@@ -10,7 +10,7 @@ float x, y = 0;
 Hud lifeBarPlayer;//test
 void Game::initWindow()
 {
-	this->window.create(sf::VideoMode(1136, 768), "CandyWay", sf::Style::Close | sf::Style::Titlebar);
+	this->window.create(sf::VideoMode(1136, 640), "CandyWay", sf::Style::Close | sf::Style::Titlebar);
 	this->window.setFramerateLimit(60);
 
 }
@@ -123,6 +123,7 @@ void Game::update()
 				this->window.close();
 			else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
 			{
+				player->view.reset(sf::FloatRect(0, 0, 1136, 640));
 				this->window.clear();
 				isMenu = true;
 			}
