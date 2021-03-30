@@ -10,10 +10,8 @@ float x, y = 0;
 Hud lifeBarPlayer;//test
 void Game::initWindow()
 {
-	this->window.create(sf::VideoMode(1136, 668), "CandyWay", sf::Style::Close | sf::Style::Titlebar);
+	this->window.create(sf::VideoMode(1136, 768), "CandyWay", sf::Style::Close | sf::Style::Titlebar);
 	this->window.setFramerateLimit(60);
-	sf::View view;
-	view.reset(sf::FloatRect(0, 0, 1136, 668));//
 
 }
 
@@ -151,6 +149,8 @@ void Game::update()
 
 void Game::renderPlayer()
 {
+
+	window.setView(player->view);
 	this->player->render(this->window);
 }
 

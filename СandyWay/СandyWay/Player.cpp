@@ -160,11 +160,14 @@ void Player::updateMovement()
 	{
 		this->move(-1.f, 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+		view.setCenter(getPosition().x, getPosition().y);//тестовая камера
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) 
 	{
 		this->move(1.f, 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+		view.setCenter(getPosition().x, getPosition().y);//тестовая камера
+		
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) 
