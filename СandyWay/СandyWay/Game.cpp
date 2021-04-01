@@ -22,12 +22,30 @@ void Game::initPlayer()
 	this->player = new Player();
 }
 
+void Game::initVrags()
+{
+	this->spawnTimerMax = 50.f;
+	this->spawnTimer = this->spawnTimerMax;
+}
+
+void Game::initWorld()
+{
+	if (!this->worldBackgroundTex.loadFromFile("Texture/world/back.png"))
+	{
+		std::cout << "ERROR::GAME::COULD NOT LOAD BACKGROUND TEXTURE" << "\n";
+	}
+
+	this->worldBackground.setTexture(this->worldBackgroundTex);
+}
+
 Game::Game()
 {
 	this->initWindow();
 	this->initPlayer();
 	this->initGUI();
 	lifeBarPlayer.update(player->getHp());//test
+	this->initVrags();
+	this->initWorld();
 }
 
 Game::~Game()
@@ -61,8 +79,15 @@ void Game::updateCollision()
 		);
 	}
 }
+
+void Game::updateWorld()
+{
+
+}
+
 void Game::initGUI()
 {
+
 	font.loadFromFile("Fonts/PixellettersFull.ttf");
 	if (!this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
 		std::cout << "ERROR::GAME::Failed to load font" << "\n";
@@ -83,7 +108,8 @@ void Game::update()
 	menuTexture2.loadFromFile("Texture/menu/btnplay.png");
 	menuTexture3.loadFromFile("Texture/menu/btnquit.png");
 	aboutTexture.loadFromFile("Texture/menu/menu.png");
-	Sprite menu0(menuTexture0), menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), about(aboutTexture);
+
+	Sprite menu0(menuTexture0), menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), about(aboutTexture), ingame(aboutTexture);
 	int menuNum = 0;
 	menu1.setPosition(635, 200);
 	menu2.setPosition(850, 200);
@@ -95,6 +121,7 @@ void Game::update()
 		menu1.setColor(Color::White);
 		menu2.setColor(Color::White);
 		menu3.setColor(Color::White);
+		ingame.setColor(Color::White);
 		menuNum = 0;
 		window.draw(menu0);
 
@@ -119,6 +146,7 @@ void Game::update()
 		window.display();
 	}
 	if (isMenu==false) {
+		window.draw(menu0);
 		while (this->window.pollEvent(this->ev))
 		{
 			if (this->ev.type == sf::Event::Closed)
@@ -146,8 +174,67 @@ void Game::update()
 
 		this->updatePlayer();
 		this->updateCollision();
+		this->updateWorld();
 	}
 }
+
+void Game::updateVrags()
+{
+	//Spawning
+	this->spawnTimer += 0.5f;
+	if (this->spawnTimer >= this->spawnTimerMax)
+	{
+		this->vrags.push_back(new Vrag(rand() % this->window.getSize().x - 20.f, -100.f));
+		this->spawnTimer = 0.f;
+	}
+
+	//Update
+	unsigned counter = 0;
+	for (auto* vrag : this->vrags)
+	{
+		vrag->update();
+
+		//Bullet culling (top of screen)
+		if (vrag->getBounds().top > this->window.getSize().y)
+		{
+			//Delete vrag
+			delete this->vrags.at(counter);
+			this->vrags.erase(this->vrags.begin() + counter);
+		}
+		//Vrag player collision
+		else if (vrag->getBounds().intersects(this->player->getGlobalBounds()))
+		{
+			this->player->loseHp(this->vrags.at(counter)->getDamage());
+			delete this->vrags.at(counter);
+			this->vrags.erase(this->vrags.begin() + counter);
+		}
+
+		++counter;
+	}
+}
+
+/*void Game::updateCombat()
+{
+	for (int i = 0; i < this->vrags.size(); ++i)
+	{
+		bool vrag_deleted = false;
+		for (size_t k = 0; k < this->bullets.size() && vrag_deleted == false; k++)
+		{
+			if (this->vrags[i]->getBounds().intersects(this->bullets[k]->getBounds()))
+			{
+				this->points += this->vrags[i]->getPoints();
+
+				delete this->vrags[i];
+				this->vrags.erase(this->vrags.begin() + i);
+
+				delete this->bullets[k];
+				this->bullets.erase(this->bullets.begin() + k);
+
+				vrag_deleted = true;
+			}
+		}
+	}
+}*/
 
 void Game::renderPlayer()
 {
@@ -157,6 +244,8 @@ void Game::renderPlayer()
 void Game::render()
 {
 	this->window.clear();
+	this->renderWorld();
+
 	if (this->player->getHp() <= 0)
 		this->window.draw(this->gameOverText);
 	this->renderPlayer();
@@ -167,4 +256,9 @@ void Game::render()
 const sf::RenderWindow& Game::getWindow() const
 {
 	return this->window;
+}
+
+void Game::renderWorld()
+{
+	this->window.draw(this->worldBackground);
 }

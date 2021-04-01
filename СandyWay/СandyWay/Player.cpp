@@ -8,11 +8,12 @@ void Player::initVariables()
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
 	this->hpMax = 100;
 	this->hp = this->hpMax;
+
 }
 
 void Player::initTexture()
 {
-	if (!this->textureSheet.loadFromFile("Texture/player_sheet.png"))
+	if (!this->textureSheet.loadFromFile("Texture/player_sheet5.png"))
 	{
 		std::cout << "ERROR::PLAYER::Could not load the player sheet!" << "\n";
 	}
@@ -35,7 +36,7 @@ void Player::initAnimations()
 
 void Player::initPhysics()
 {
-	this->velocityMax = 20.f;
+	this->velocityMax = 10.f;
 	this->velocityMin = 1.f;
 	this->acceleration = 3.0f;
 	this->drag = 0.85f;
@@ -156,26 +157,27 @@ void Player::updateMovement()
 {
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
 		this->move(-1.f, 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) 
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
 		this->move(1.f, 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		this->sprite.move(0.f, -1.f);
+		this->move(0.f, -1.f);
+		this->animState = PLAYER_ANIMATION_STATES::JUMPING;
 
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) 
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
 		this->sprite.move(0.f, 1.f);
-		this->loseHp(5);
+		this->loseHp(1);
 	}
 }
 
@@ -225,6 +227,20 @@ void Player::updateAnimations()
 
 		this->sprite.setScale(-3.f, 3.f);
 		this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 3.f, 0.f);
+	}
+	else if (this->animState == PLAYER_ANIMATION_STATES::JUMPING)
+	{
+		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.1f || this->getAnimSwitch())
+		{
+			this->currentFrame.top = 50.f;
+			this->currentFrame.left += 40.f;
+			if (this->currentFrame.left > 360.f)
+				this->currentFrame.left = 0;
+			this->sprite.setScale(3.f, 3.f);
+			this->sprite.setOrigin(0.f, 0.f);
+		}
+		this->sprite.setScale(3.f, 3.f);
+		this->sprite.setOrigin(0.f, 0.f);
 	}
 	else
 		this->animationTimer.restart();
