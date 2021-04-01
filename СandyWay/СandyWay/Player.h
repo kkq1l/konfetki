@@ -40,6 +40,8 @@ public:
 	Player();
 	virtual ~Player();
 
+	sf::View view;
+
 	const bool& getAnimSwitch();
 	const sf::Vector2f getPosition() const;
 	const sf::FloatRect getGlobalBounds() const;

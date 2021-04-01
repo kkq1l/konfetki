@@ -1,7 +1,61 @@
 ﻿  Game.cpp
+<<<<<<< HEAD
 D:\stud\pd\konfetki\СandyWay\СandyWay\Game.cpp(187,83): error C2661: Vrag::Vrag: нет перегруженной функции, принимающей 2 аргументов
   Vrag.cpp
 D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(69,41): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
 D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(98,1): error C2511: void Vrag::rendervrag(sf::RenderTarget *): перегруженная функция-член не найдена в "Vrag"
 D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.h(7): message : см. объявление "Vrag"
 D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(99,15): error C2671: Vrag::rendervrag: статические функции-члены не имеют указателей "this"
+=======
+  Hud.cpp
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Hud.cpp(26,44): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  main.cpp
+  Player.cpp
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(138,41): warning C4244: +=: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(192,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(193,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(205,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(206,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(221,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(222,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+  Tile.cpp
+  TileMap.cpp
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(67): warning C4172: возвращение адреса локальной или временной переменной : anim_switch
+  All 133 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  СandyWay.vcxproj -> C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\Release\СandyWay.exe
+>>>>>>> 28536ed846835ac7b29f05830574204c968978e9
