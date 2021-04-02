@@ -2,7 +2,6 @@
 
 #include "Header.h"
 #include "Player.h" 
-#include "Vrag.h"
 #include <string>
 #include <sstream>
 
@@ -22,7 +21,6 @@ private:
 
 	float spawnTimer;
 	float spawnTimerMax;
-	std::vector<Vrag*>vrags;
 
 	void initWindow();
 	void initPlayer();
@@ -46,7 +44,6 @@ public:
 	void updateHealth();//test
 	void updatePlayer();
 	void updateCollision();
-	void updateVrags();
 	void update();
 	void renderPlayer();
 	void render();

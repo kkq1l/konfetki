@@ -98,6 +98,11 @@ void Player::resetVelocityY()
 	this->velocity.y = 0.f;
 }
 
+void Player::loseU()
+{
+	loseGame = 1;
+}
+
 void Player::setHp(const int hp)
 {
 	this->hp = hp;
@@ -156,30 +161,31 @@ void Player::updatePhysics()
 void Player::updateMovement()
 {
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
+	if (loseGame==0) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+		{
+			this->move(-1.f, 0.f);
+			this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+		{
+			this->move(1.f, 0.f);
+			this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		this->move(-1.f, 0.f);
-		this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-	{
-		this->move(1.f, 0.f);
-		this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-		
-		
-	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-	{
-		this->move(0.f, -1.f);
-		this->animState = PLAYER_ANIMATION_STATES::JUMPING;
+		}
 
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-	{
-		this->sprite.move(0.f, 1.f);
-		this->loseHp(1);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+		{
+			this->move(0.f, -1.f);
+			this->animState = PLAYER_ANIMATION_STATES::JUMPING;
+
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+		{
+			this->sprite.move(0.f, 1.f);
+			this->loseHp(1);
+		}
 	}
 }
 

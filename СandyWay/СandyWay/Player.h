@@ -12,6 +12,7 @@ private:
 
 	int hp;
 	int hpMax;
+	int loseGame=0;
 
 	//Animation
 	short animState;
@@ -51,7 +52,7 @@ public:
 	void setPosition(const float x, const float y);
 	void resetVelocityY();
 
-
+	void loseU();
 	void setHp(const int hp);
 	void loseHp(const int value);
 

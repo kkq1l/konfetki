@@ -179,63 +179,6 @@ void Game::update()
 	}
 }
 
-void Game::updateVrags()
-{
-	//Spawning
-	this->spawnTimer += 0.5f;
-	if (this->spawnTimer >= this->spawnTimerMax)
-	{
-		this->vrags.push_back(new Vrag(rand() % this->window.getSize().x - 20.f, -100.f));
-		this->spawnTimer = 0.f;
-	}
-
-	//Update
-	unsigned counter = 0;
-	for (auto* vrag : this->vrags)
-	{
-		vrag->update();
-
-		//Bullet culling (top of screen)
-		if (vrag->getBounds().top > this->window.getSize().y)
-		{
-			//Delete vrag
-			delete this->vrags.at(counter);
-			this->vrags.erase(this->vrags.begin() + counter);
-		}
-		//Vrag player collision
-		else if (vrag->getBounds().intersects(this->player->getGlobalBounds()))
-		{
-			this->player->loseHp(this->vrags.at(counter)->getDamage());
-			delete this->vrags.at(counter);
-			this->vrags.erase(this->vrags.begin() + counter);
-		}
-
-		++counter;
-	}
-}
-
-/*void Game::updateCombat()
-{
-	for (int i = 0; i < this->vrags.size(); ++i)
-	{
-		bool vrag_deleted = false;
-		for (size_t k = 0; k < this->bullets.size() && vrag_deleted == false; k++)
-		{
-			if (this->vrags[i]->getBounds().intersects(this->bullets[k]->getBounds()))
-			{
-				this->points += this->vrags[i]->getPoints();
-
-				delete this->vrags[i];
-				this->vrags.erase(this->vrags.begin() + i);
-
-				delete this->bullets[k];
-				this->bullets.erase(this->bullets.begin() + k);
-
-				vrag_deleted = true;
-			}
-		}
-	}
-}*/
 
 void Game::renderPlayer()
 {
@@ -305,7 +248,7 @@ void Game::render()
 		}
 
 	this->window.clear();
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	for (int i = 0; i < H; i++)
 		for (int j = 0; j < W; j++)
 		{
@@ -334,12 +277,15 @@ void Game::render()
 		}
 
 	
-=======
+//=======
 	this->renderWorld();
 
->>>>>>> c8048320f964f0b986e1e31740d8bd3617ad0363
-	if (this->player->getHp() <= 0)
+//>>>>>>> c8048320f964f0b986e1e31740d8bd3617ad0363
+	if (this->player->getHp() <= 0) {
+		
+		player->loseU();
 		this->window.draw(this->gameOverText);
+	}
 	this->renderPlayer();
 	this->updateHealth(); //test
 	this->window.display();

@@ -1,35 +1,24 @@
 ﻿  Game.cpp
-<<<<<<< HEAD
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(192,13): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(222,13): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(193,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(223,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(203,24): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(233,24): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(211,25): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(241,25): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-=======
-<<<<<<< HEAD
-D:\stud\pd\konfetki\СandyWay\СandyWay\Game.cpp(187,83): error C2661: Vrag::Vrag: нет перегруженной функции, принимающей 2 аргументов
-  Vrag.cpp
-D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(69,41): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
-D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(98,1): error C2511: void Vrag::rendervrag(sf::RenderTarget *): перегруженная функция-член не найдена в "Vrag"
-D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.h(7): message : см. объявление "Vrag"
-D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(99,15): error C2671: Vrag::rendervrag: статические функции-члены не имеют указателей "this"
-=======
->>>>>>> c8048320f964f0b986e1e31740d8bd3617ad0363
   Hud.cpp
 C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Hud.cpp(26,44): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
@@ -38,37 +27,47 @@ C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Hud.cpp(26,44): 
           ]
   main.cpp
   Player.cpp
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(138,41): warning C4244: +=: преобразование "double" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(144,41): warning C4244: +=: преобразование "double" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(190,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(198,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(191,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(199,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(203,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(211,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(204,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(212,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(219,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(227,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
           ]
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(220,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(228,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(243,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(244,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
           with
           [
               T=int
@@ -77,8 +76,7 @@ C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(220,3
   TileMap.cpp
   Создание кода
   Previous IPDB not found, fall back to full compilation.
-C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(67): warning C4172: возвращение адреса локальной или временной переменной : anim_switch
-  All 134 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(68): warning C4172: возвращение адреса локальной или временной переменной : anim_switch
+  All 139 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Создание кода завершено
   СandyWay.vcxproj -> C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\Release\СandyWay.exe
->>>>>>> 28536ed846835ac7b29f05830574204c968978e9
