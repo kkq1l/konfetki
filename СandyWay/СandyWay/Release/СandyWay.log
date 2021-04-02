@@ -1,4 +1,5 @@
 ﻿  Game.cpp
+<<<<<<< HEAD
 C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(192,13): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
@@ -19,6 +20,16 @@ C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(211,25)
           [
               T=float
           ]
+=======
+<<<<<<< HEAD
+D:\stud\pd\konfetki\СandyWay\СandyWay\Game.cpp(187,83): error C2661: Vrag::Vrag: нет перегруженной функции, принимающей 2 аргументов
+  Vrag.cpp
+D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(69,41): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(98,1): error C2511: void Vrag::rendervrag(sf::RenderTarget *): перегруженная функция-член не найдена в "Vrag"
+D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.h(7): message : см. объявление "Vrag"
+D:\stud\pd\konfetki\СandyWay\СandyWay\Vrag.cpp(99,15): error C2671: Vrag::rendervrag: статические функции-члены не имеют указателей "this"
+=======
+>>>>>>> c8048320f964f0b986e1e31740d8bd3617ad0363
   Hud.cpp
 C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Hud.cpp(26,44): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
@@ -70,3 +81,4 @@ C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(67): 
   All 134 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Создание кода завершено
   СandyWay.vcxproj -> C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\Release\СandyWay.exe
+>>>>>>> 28536ed846835ac7b29f05830574204c968978e9
