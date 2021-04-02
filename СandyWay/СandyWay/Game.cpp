@@ -7,7 +7,10 @@ using namespace sf;
 
 bool isMenu = 1;
 float x, y = 0;
-Hud lifeBarPlayer;//test
+Hud lifeBarPlayer;//
+
+float dx, dy;
+
 void Game::initWindow()
 {
 	this->window.create(sf::VideoMode(1136, 640), "CandyWay", sf::Style::Close | sf::Style::Titlebar);
@@ -123,7 +126,6 @@ void Game::update()
 				this->window.close();
 			else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
 			{
-				player->view.reset(sf::FloatRect(0, 0, 1136, 640));
 				this->window.clear();
 				isMenu = true;
 			}
@@ -150,14 +152,100 @@ void Game::update()
 
 void Game::renderPlayer()
 {
-
-	window.setView(player->view);
 	this->player->render(this->window);
 }
 
 void Game::render()
 {
+	const int H = 17;
+	const int W = 150;
+	Texture tileSet;
+	float offsetX = 0, offsetY = 0;
+	tileSet.loadFromFile("Texture/Mario_tileset.png");
+	Sprite tile(tileSet);
+	String TileMap[H] = {
+"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+"0                                                                                                                                                    0",
+"0                                                                                    w                                                               0",
+"0                   w                                  w                   w                                                                         0",
+"0                                      w                                       kk                                                                    0",
+"0                                                                             k  k    k    k                                                         0",
+"0                      c                                                      k      kkk  kkk  w                                                     0",
+"0                                                                       r     k       k    k                                                         0",
+"0                                                                      rr     k  k                                                                   0",
+"0                                                                     rrr      kk                                                                    0",
+"0               c    kckck                                           rrrr                                                                            0",
+"0                                      t0                           rrrrr                                                                            0",
+"0G                                     00              t0          rrrrrr            G                                                               0",
+"0           d    g       d             00              00         rrrrrrr                                                                            0",
+"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+	};
+
+	bool onGround;
+
+
+	FloatRect rect;
+	int num = 0;
+	rect = FloatRect(100, 180, 16, 16);
+	for (int i = rect.top / 16; i < (rect.top + rect.height) / 16; i++)
+		for (int j = rect.left / 16; j < (rect.left + rect.width) / 16; j++)
+		{
+			if ((TileMap[i][j] == 'P') || (TileMap[i][j] == 'k') || (TileMap[i][j] == '0') || (TileMap[i][j] == 'r') || (TileMap[i][j] == 't'))
+			{
+				if (dy > 0 && num == 1)
+				{
+					rect.top = i * 16 - rect.height;  dy = 0;   onGround = true;
+				}
+				if (dy < 0 && num == 1)
+				{
+					rect.top = i * 16 + 16;   dy = 0;
+				}
+				if (dx > 0 && num == 0)
+				{
+					rect.left = j * 16 - rect.width;
+				}
+				if (dx < 0 && num == 0)
+				{
+					rect.left = j * 16 + 16;
+				}
+			}
+
+			if (TileMap[i][j] == 'c') {
+				// TileMap[i][j]=' '; 
+			}
+		}
+
 	this->window.clear();
+	for (int i = 0; i < H; i++)
+		for (int j = 0; j < W; j++)
+		{
+			if (TileMap[i][j] == 'P')  tile.setTextureRect(IntRect(143 - 16 * 3, 112, 16, 16));
+
+			if (TileMap[i][j] == 'k')  tile.setTextureRect(IntRect(143, 112, 16, 16));
+
+			if (TileMap[i][j] == 'c')  tile.setTextureRect(IntRect(143 - 16, 112, 16, 16));
+
+			if (TileMap[i][j] == 't')  tile.setTextureRect(IntRect(0, 47, 32, 95 - 47));
+
+			if (TileMap[i][j] == 'g')  tile.setTextureRect(IntRect(0, 16 * 9 - 5, 3 * 16, 16 * 2 + 5));
+
+			if (TileMap[i][j] == 'G')  tile.setTextureRect(IntRect(145, 222, 222 - 145, 255 - 222));
+
+			if (TileMap[i][j] == 'd')  tile.setTextureRect(IntRect(0, 106, 74, 127 - 106));
+
+			if (TileMap[i][j] == 'w')  tile.setTextureRect(IntRect(99, 224, 140 - 99, 255 - 224));
+
+			if (TileMap[i][j] == 'r')  tile.setTextureRect(IntRect(143 - 32, 112, 16, 16));
+
+			if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
+
+			tile.setPosition(j * 16 - offsetX, i * 16 - offsetY);
+			window.draw(tile);
+		}
+
+	
 	if (this->player->getHp() <= 0)
 		this->window.draw(this->gameOverText);
 	this->renderPlayer();
