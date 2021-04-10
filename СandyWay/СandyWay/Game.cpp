@@ -13,51 +13,44 @@ float dx, dy;
 
 void Game::initWindow()
 {
-	this->window.create(sf::VideoMode(1136, 640), "CandyWay", sf::Style::Close | sf::Style::Titlebar);
-	this->window.setFramerateLimit(60);
-
+	window.create(sf::VideoMode(1136, 640), "CandyWay", sf::Style::Close | sf::Style::Titlebar);
+	window.setFramerateLimit(60);
 }
 
 void Game::initPlayer()
 {
-	this->player = new Player();
+	player = new Player();
 }
 
 void Game::initVrags()
 {
-	this->spawnTimerMax = 50.f;
-	this->spawnTimer = this->spawnTimerMax;
+	spawnTimerMax = 50.f;
+	spawnTimer = spawnTimerMax;
 }
 
 void Game::initWorld()
 {
-	if (!this->worldBackgroundTex.loadFromFile("Texture/world/back.png"))
-	{
-		std::cout << "ERROR::GAME::COULD NOT LOAD BACKGROUND TEXTURE" << "\n";
-	}
+	worldBackgroundTex.loadFromFile("Texture/world/back.png");
+	
 
-	this->worldBackground.setTexture(this->worldBackgroundTex);
+	worldBackground.setTexture(worldBackgroundTex);
 }
 
 Game::Game()
 {
-	this->initWindow();
-	this->initPlayer();
-	this->initGUI();
+	initWindow();
+	initPlayer();
+	initGUI();
 	lifeBarPlayer.update(player->getHp());//test
-	this->initVrags();
-	this->initWorld();
+	initVrags();
+	initWorld();
 }
 
 Game::~Game()
 {
-	delete this->player;
+	delete player;
 }
 
-
-
-
-//test
 void Game::updateHealth()
 {
 	lifeBarPlayer.update(player->getHp());
@@ -66,17 +59,17 @@ void Game::updateHealth()
 
 void Game::updatePlayer()
 {
-	this->player->update();
+	player->update();
 }
 
 void Game::updateCollision()
 {
-	if (this->player->getPosition().y + this->player->getGlobalBounds().height > this->window.getSize().y)
+	if (player->getPosition().y + player->getGlobalBounds().height > window.getSize().y)
 	{
-		this->player->resetVelocityY();
-		this->player->setPosition(
-			this->player->getPosition().x,
-			this->window.getSize().y - this->player->getGlobalBounds().height
+		player->resetVelocityY();
+		player->setPosition(
+			player->getPosition().x,
+			window.getSize().y - player->getGlobalBounds().height
 		);
 	}
 }
@@ -89,17 +82,7 @@ void Game::updateWorld()
 void Game::initGUI()
 {
 
-	font.loadFromFile("Fonts/PixellettersFull.ttf");
-	if (!this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
-		std::cout << "ERROR::GAME::Failed to load font" << "\n";
-
-	this->gameOverText.setFont(this->font);
-	this->gameOverText.setCharacterSize(60);
-	this->gameOverText.setFillColor(sf::Color::Red);
-	this->gameOverText.setString("Game Over!");
-	this->gameOverText.setPosition(
-		this->window.getSize().x / 2.f - this->gameOverText.getGlobalBounds().width / 22.f,
-		this->window.getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 22.f);
+	
 }
 void Game::update()
 {
@@ -118,103 +101,134 @@ void Game::update()
 
 	while (isMenu)
 	{
-		menu0.setColor(Color::White);
-		menu1.setColor(Color::White);
-		menu2.setColor(Color::White);
-		menu3.setColor(Color::White);
-		ingame.setColor(Color::White);
-		menuNum = 0;
-		window.draw(menu0);
+		while (window.pollEvent(ev)) {
+			menu0.setColor(Color::White);
+			menu1.setColor(Color::White);
+			menu2.setColor(Color::White);
+			menu3.setColor(Color::White);
+			ingame.setColor(Color::White);
+			menuNum = 0;
+			window.draw(menu0);
 
-		if (IntRect(635, 200, 200, 100).contains(Mouse::getPosition(window))) { menu1.setColor(Color::Blue); menuNum = 1; }
-		if (IntRect(850, 200, 200, 100).contains(Mouse::getPosition(window))) { menu2.setColor(Color::Blue); menuNum = 2; }
-		if (IntRect(635, 320, 200, 100).contains(Mouse::getPosition(window))) { menu3.setColor(Color::Blue); menuNum = 3; }
+			if (IntRect(635, 200, 200, 100).contains(Mouse::getPosition(window))) { menu1.setColor(Color::Blue); menuNum = 1; }
+			if (IntRect(850, 200, 200, 100).contains(Mouse::getPosition(window))) { menu2.setColor(Color::Blue); menuNum = 2; }
+			if (IntRect(635, 320, 200, 100).contains(Mouse::getPosition(window))) { menu3.setColor(Color::Blue); menuNum = 3; }
 
-		if (Mouse::isButtonPressed(Mouse::Left))
-		{
-			if (menuNum == 1) {
-				isMenu = false; this -> window.clear();
-			}//если нажали первую кнопку, то выходим из меню 
-			if (menuNum == 2) { window.draw(about); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
-			if (menuNum == 3) { window.close(); isMenu = false; }
+			if (Mouse::isButtonPressed(Mouse::Left))
+			{
+				if (menuNum == 1) {
+					isMenu = false; this->window.clear();
+				}
+				if (menuNum == 2) { window.draw(about); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
+				if (menuNum == 3) { window.close(); isMenu = false; }
 
+			}
+
+			window.draw(menu1);
+			window.draw(menu2);
+			window.draw(menu3);
+
+			window.display();
 		}
-
-		window.draw(menu1);
-		window.draw(menu2);
-		window.draw(menu3);
-
-		window.display();
 	}
 	if (isMenu==false) {
 		window.draw(menu0);
-		while (this->window.pollEvent(this->ev))
+
+		while (window.pollEvent(ev))
 		{
-			if (this->ev.type == sf::Event::Closed)
-				this->window.close();
-			else if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
+
+			if (ev.type == sf::Event::Closed)
+				window.close();
+			else if (ev.type == sf::Event::KeyPressed && ev.key.code == sf::Keyboard::Escape)
 			{
-				this->window.clear();
+				player->view.reset(sf::FloatRect(0, 0, 1136, 640));
+				window.clear();
 				isMenu = true;
 			}
 
 
-			if (
-				this->ev.type == sf::Event::KeyReleased &&
-				(
-					this->ev.key.code == sf::Keyboard::A ||
-					this->ev.key.code == sf::Keyboard::D ||
-					this->ev.key.code == sf::Keyboard::W ||
-					this->ev.key.code == sf::Keyboard::S
+			if (ev.type == sf::Event::KeyReleased && (
+					ev.key.code == sf::Keyboard::A ||
+					ev.key.code == sf::Keyboard::D ||
+					ev.key.code == sf::Keyboard::W ||
+					ev.key.code == sf::Keyboard::S
 					)
 				)
 			{
-				this->player->resetAnimationTimer();
+				player->resetAnimationTimer();
 			}
 		}
 
-		this->updatePlayer();
-		this->updateCollision();
-		this->updateWorld();
+		updatePlayer();
+		updateCollision();
+		updateWorld();
 	}
 }
 
 
+
+
+
 void Game::renderPlayer()
 {
-	this->player->render(this->window);
+	player->render(window);
+	window.setView(player->view);
 }
 
 void Game::render()
 {
-	const int H = 17;
+	const int H = 41;
 	const int W = 150;
 	Texture tileSet;
 	float offsetX = 0, offsetY = 0;
 	tileSet.loadFromFile("Texture/Mario_tileset.png");
 	Sprite tile(tileSet);
 	String TileMap[H] = {
-"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-"0                                                                                                                                                    0",
-"0                                                                                    w                                                               0",
-"0                   w                                  w                   w                                                                         0",
-"0                                      w                                       kk                                                                    0",
-"0                                                                             k  k    k    k                                                         0",
-"0                      c                                                      k      kkk  kkk  w                                                     0",
-"0                                                                       r     k       k    k                                                         0",
-"0                                                                      rr     k  k                                                                   0",
-"0                                                                     rrr      kk                                                                    0",
-"0               c    kckck                                           rrrr                                                                            0",
-"0                                      t0                           rrrrr                                                                            0",
-"0G                                     00              t0          rrrrrr            G                                                               0",
-"0           d    g       d             00              00         rrrrrrr                                                                            0",
-"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
-"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"P                                                                                                                                                     ",
+"P                                                                                                                                                     ",
+"P                 P                                           P                                   P                                                  P",
 "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
 	};
 
 	bool onGround;
-
+	std::cout << player->getPosition().x<<std::endl;
 
 	FloatRect rect;
 	int num = 0;
@@ -247,7 +261,7 @@ void Game::render()
 			}
 		}
 
-	this->window.clear();
+	window.clear();
 //<<<<<<< HEAD
 	for (int i = 0; i < H; i++)
 		for (int j = 0; j < W; j++)
@@ -278,25 +292,25 @@ void Game::render()
 
 	
 //=======
-	this->renderWorld();
+	renderWorld();
 
 //>>>>>>> c8048320f964f0b986e1e31740d8bd3617ad0363
-	if (this->player->getHp() <= 0) {
+	if (player->getHp() <= 0) {
 		
 		player->loseU();
-		this->window.draw(this->gameOverText);
+		window.draw(gameOverText);
 	}
-	this->renderPlayer();
-	this->updateHealth(); //test
-	this->window.display();
+	renderPlayer();
+	updateHealth(); //test
+	window.display();
 }
 
 const sf::RenderWindow& Game::getWindow() const
 {
-	return this->window;
+	return window;
 }
 
 void Game::renderWorld()
 {
-	this->window.draw(this->worldBackground);
+	//window.draw(worldBackground);
 }

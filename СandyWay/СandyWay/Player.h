@@ -1,7 +1,7 @@
 #pragma once
 #include "Header.h"
 
-enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING };
+enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING,DEAD };
 
 class Player
 {
@@ -13,9 +13,7 @@ private:
 	int hp;
 	int hpMax;
 	int loseGame=0;
-
 	//Animation
-	short animState;
 	sf::IntRect currentFrame;
 	bool animationSwitch;
 
@@ -40,11 +38,19 @@ private:
 public:
 	Player();
 	virtual ~Player();
+	sf::View view;
+
+
+	sf::FloatRect rect;
+	bool onGround;
+	float dx, dy;
 
 
 	const bool& getAnimSwitch();
 	const sf::Vector2f getPosition() const;
 	const sf::FloatRect getGlobalBounds() const;
+
+	short animState;
 
 	const int& getHp() const;
 	const int& getHpMax() const;

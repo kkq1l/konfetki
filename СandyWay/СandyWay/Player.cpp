@@ -8,12 +8,13 @@ void Player::initVariables()
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
 	this->hpMax = 100;
 	this->hp = this->hpMax;
+	
 
 }
 
 void Player::initTexture()
 {
-	if (!this->textureSheet.loadFromFile("Texture/player_sheet5.png"))
+	if (!this->textureSheet.loadFromFile("Texture/player_sheet6.png"))
 	{
 		std::cout << "ERROR::PLAYER::Could not load the player sheet!" << "\n";
 	}
@@ -22,7 +23,7 @@ void Player::initTexture()
 void Player::initSprite()
 {
 	this->sprite.setTexture(this->textureSheet);
-	this->currentFrame = sf::IntRect(0, 0, 40, 50); //SHOULD BE 40 50
+	this->currentFrame = sf::IntRect(0, 0, 40, 50);
 
 	this->sprite.setTextureRect(this->currentFrame);
 	this->sprite.setScale(3.f, 3.f);
@@ -123,6 +124,7 @@ void Player::loseHp(const int value)
 
 
 
+
 void Player::resetAnimationTimer()
 {
 	this->animationTimer.restart();
@@ -137,6 +139,7 @@ void Player::move(const float dir_x, const float dir_y)
 	{
 		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f);
 	}
+
 }
 
 void Player::updatePhysics()
@@ -155,38 +158,49 @@ void Player::updatePhysics()
 		this->velocity.y = 0.f;
 
 	this->sprite.move(this->velocity);
+
+
+
 }
 
 
 void Player::updateMovement()
 {
-	this->animState = PLAYER_ANIMATION_STATES::IDLE;
-	if (loseGame==0) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		{
-			this->move(-1.f, 0.f);
-			this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		{
-			this->move(1.f, 0.f);
-			this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-
-
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		{
-			this->move(0.f, -1.f);
-			this->animState = PLAYER_ANIMATION_STATES::JUMPING;
-
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		{
-			this->sprite.move(0.f, 1.f);
-			this->loseHp(1);
-		}
+	if (hp > 0) {
+		this->animState = PLAYER_ANIMATION_STATES::IDLE;
 	}
+	else {
+		this->animState = PLAYER_ANIMATION_STATES::DEAD;
+	}
+		if (loseGame == 0) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+			{
+				this->move(-1.f, 0.f);
+				this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+				view.setCenter(getPosition().x, getPosition().y);
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+			{
+				this->move(1.f, 0.f);
+				this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+				view.setCenter(getPosition().x, getPosition().y);
+
+
+			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+			{
+				this->move(0.f, -1.f);
+				//this->animState = PLAYER_ANIMATION_STATES::JUMPING;
+
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+			{
+				this->sprite.move(0.f, 1.f);
+				this->loseHp(1);
+			}
+		}
+	
 }
 
 void Player::updateAnimations()
@@ -250,6 +264,17 @@ void Player::updateAnimations()
 		this->sprite.setScale(3.f, 3.f);
 		this->sprite.setOrigin(0.f, 0.f);
 	}
+	else if (this->animState == PLAYER_ANIMATION_STATES::DEAD)
+	{
+		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f || this->getAnimSwitch())
+		{
+			this->currentFrame.top = 125.f;
+			this->currentFrame.left = 301.f;
+
+			this->animationTimer.restart();
+			this->sprite.setTextureRect(this->currentFrame);
+		}
+	}
 	else
 		this->animationTimer.restart();
 }
@@ -257,8 +282,10 @@ void Player::updateAnimations()
 void Player::update()
 {
 	this->updateMovement();
+
 	this->updateAnimations();
 	this->updatePhysics();
+
 }
 
 void Player::render(sf::RenderTarget& target)
