@@ -22,10 +22,11 @@ void Player::initTexture()
 void Player::initSprite()
 {
 	this->sprite.setTexture(this->textureSheet);
-	this->currentFrame = sf::IntRect(0, 0, 40, 50); //SHOULD BE 40 50
+	this->currentFrame = sf::IntRect(0, 0, 40, 50); 
 
 	this->sprite.setTextureRect(this->currentFrame);
 	this->sprite.setScale(3.f, 3.f);
+	sprite.setPosition(x + w / 2, y + h / 2);////////
 }
 
 void Player::initAnimations()
@@ -121,15 +122,13 @@ void Player::loseHp(const int value)
 	}
 }
 
-
-
 void Player::resetAnimationTimer()
 {
 	this->animationTimer.restart();
 	this->animationSwitch = true;
 }
 
-void Player::move(const float dir_x, const float dir_y)
+void Player::move(const float dir_x, const float dir_y) ///nujno zakomentir
 {
 	this->velocity.x += dir_x * this->acceleration;
 
@@ -160,6 +159,8 @@ void Player::updatePhysics()
 
 void Player::updateMovement()
 {
+
+
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
 	if (loseGame==0) {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
@@ -179,6 +180,8 @@ void Player::updateMovement()
 		{
 			this->move(0.f, -1.f);
 			this->animState = PLAYER_ANIMATION_STATES::JUMPING;
+			currentFrame += 0.005 * time;
+			if (currentFrame > 3) currentFrame -= 3;
 
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
@@ -186,7 +189,7 @@ void Player::updateMovement()
 			this->sprite.move(0.f, 1.f);
 			this->loseHp(1);
 		}
-	}
+	} */
 }
 
 void Player::updateAnimations()
