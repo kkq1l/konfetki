@@ -3,13 +3,6 @@
 Hud::Hud()
 {
 	image.loadFromFile("Texture/life.png");
-	if (!image.loadFromFile("Texture/life.png"))
-	{
-		std::cout << "ERROR::HUD::Could not load the player sheet!" << "\n";
-	}
-	else {
-		std::cout << "DONE::HUD" << "\n";
-	}
 	image.createMaskFromColor(Color(50, 96, 166));
 	t.loadFromImage(image);
 	s.setTexture(t);
@@ -19,15 +12,32 @@ Hud::Hud()
 	max = 100;
 }
 
+void Hud::initGUI()
+{
+	font.loadFromFile("Fonts/PixellettersFull.ttf");
+
+	gameOverText.setFont(font);
+	gameOverText.setCharacterSize(60);
+	gameOverText.setFillColor(sf::Color::Red);
+	gameOverText.setString("Game Over!");
+	gameOverText.setPosition(555, 300);
+}
+
 void Hud::update(int k)
 {
-	if (k > 0)
+	if (k > 0) {
+
 		if (k < max)
 			bar.setSize(Vector2f(10, (max - k) * 70 / max));
+	}
+	else {
+			
+	}
 }
 
 void Hud::draw(RenderWindow& window)
 {
+
 	Vector2f center = window.getView().getCenter();
 	Vector2f size = window.getView().getSize();
 
@@ -37,3 +47,4 @@ void Hud::draw(RenderWindow& window)
 	window.draw(s);
 	window.draw(bar);
 }
+

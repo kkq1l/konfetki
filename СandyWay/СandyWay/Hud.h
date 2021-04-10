@@ -6,6 +6,9 @@ using namespace sf;
 class Hud
 {
 public:
+
+	sf::Text gameOverText;
+	sf::Font font;
 	Image image;
 	Texture t;
 	Sprite s;
@@ -14,8 +17,9 @@ public:
 
 	Hud();
 
-	void update(int k);
+	void initGUI();
 
+	void update(int k);
 	void draw(RenderWindow& window);
 };
 
