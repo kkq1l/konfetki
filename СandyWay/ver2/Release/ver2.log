@@ -1,1 +1,33 @@
-﻿
+﻿  main.cpp
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(45,1): warning C4305: =: усечение из "double" в "float"
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(56,26): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(62,1): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(78,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(79,15): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(84,53): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(86,54): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(116,14): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(132,15): warning C4305: =: усечение из "double" в "float"
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(138,14): warning C4305: =: усечение из "double" в "float"
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\ver2\main.cpp(143,34): warning C4305: =: усечение из "double" в "float"
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 80 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  ver2.vcxproj -> C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\Release\ver2.exe
