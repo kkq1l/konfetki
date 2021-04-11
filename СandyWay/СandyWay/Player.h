@@ -70,12 +70,4 @@ public:
 	void updateAnimations();
 	void update();
 	void render(sf::RenderTarget& target);
-
-	Player(String F, float X, float Y, float W, float H)///////////////////
-	{
-		state = stay; speed = 0; playerScore = 0; dx = 0; dy = 0;
-		life = true; isMove = false; isSelect = false; onGroud = false;
-	}
-
-	enum { left, right, up, down, jump, stay } state; // perechislenie i sostoyanie
 };

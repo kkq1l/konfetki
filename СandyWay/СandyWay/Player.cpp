@@ -23,12 +23,10 @@ void Player::initTexture()
 void Player::initSprite()
 {
 	this->sprite.setTexture(this->textureSheet);
-	this->currentFrame = sf::IntRect(0, 0, 40, 50); 
 	this->currentFrame = sf::IntRect(0, 0, 40, 50);
 
 	this->sprite.setTextureRect(this->currentFrame);
 	this->sprite.setScale(3.f, 3.f);
-	sprite.setPosition(x + w / 2, y + h / 2);
 }
 
 void Player::initAnimations()
@@ -127,14 +125,13 @@ void Player::loseHp(const int value)
 
 
 
->>>>>>> 7e56b8ec1645500ce0c40a09c06e60ebe48b1faa
 void Player::resetAnimationTimer()
 {
 	this->animationTimer.restart();
 	this->animationSwitch = true;
 }
 
-void Player::move(const float dir_x, const float dir_y) ///nujno zakomentir
+void Player::move(const float dir_x, const float dir_y)
 {
 	this->velocity.x += dir_x * this->acceleration;
 
@@ -162,40 +159,11 @@ void Player::updatePhysics()
 
 	this->sprite.move(this->velocity);
 
-	void Player::updateMovement()
-{
 
 
-	this->animState = PLAYER_ANIMATION_STATES::IDLE;
-	if (loseGame == 0) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		{
-			this->move(-1.f, 0.f);
-			this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		{
-			this->move(1.f, 0.f);
-			this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-
-
-
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		{
-			this->move(0.f, -1.f);
-			this->animState = PLAYER_ANIMATION_STATES::JUMPING;
-			currentFrame += 0.005 * time;
-			if (currentFrame > 3) currentFrame -= 3;
-
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		{
-			this->sprite.move(0.f, 1.f);
-			this->loseHp(1);
-		}
-	}
 }
+
+
 void Player::updateMovement()
 {
 	if (hp > 0) {
@@ -233,7 +201,6 @@ void Player::updateMovement()
 			}
 		}
 	
->>>>>>> 7e56b8ec1645500ce0c40a09c06e60ebe48b1faa
 }
 
 void Player::updateAnimations()
