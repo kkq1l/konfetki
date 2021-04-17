@@ -1,0 +1,70 @@
+﻿  Game.cpp
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(54,45): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Game.cpp(54,33): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  Hud.cpp
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Hud.cpp(31,44): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  main.cpp
+  Map.cpp
+  Player.cpp
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(148,41): warning C4244: +=: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(215,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(216,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(228,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(229,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(244,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(245,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(260,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(261,35): warning C4244: +=: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(274,29): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(275,30): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+  Создание кода...
+C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\СandyWay\Player.cpp(69): warning C4172: возвращение адреса локальной или временной переменной : anim_switch
+  СandyWay.vcxproj -> C:\ИВТ-18\6 семестр\ПД\konfetki\СandyWay\Debug\СandyWay.exe

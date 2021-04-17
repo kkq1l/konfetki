@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "Game.h"
-
+float centerWindow = 1366/2;
 void Player::initVariables()
 {
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
@@ -138,7 +138,7 @@ void Player::move(const float dir_x, const float dir_y)
 	if (std::abs(this->velocity.x) > this->velocityMax)
 	{
 		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f);
-		
+		view.move(velocity.x-((this->velocity.x < 0.f) ? -1.6 : 1.6), 0);
 	}
 
 }
@@ -178,14 +178,12 @@ void Player::updateMovement()
 			{
 				this->move(-1.f, 0.f);
 				this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-					view.move(velocity.x-0.05,0);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			{
 				this->move(1.f, 0.f);
 				this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-				view.move(velocity.x+0.05, 0);
-
+				
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))

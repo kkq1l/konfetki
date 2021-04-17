@@ -40,20 +40,19 @@ void Game::initMap()
 
 void Game::drawMap()
 {
+	RectangleShape rectangle(Vector2f(32, 32));
 
-	map_image.loadFromFile("images/map.png");
-	map.loadFromImage(map_image);
-	s_map.setTexture(map);
-	for (int i = 0; i < 25; i++)
-		for (int j = 0; j < 40; j++)
+	for (int i = 0; i < H; i++)
+		for (int j = 0; j < W; j++)
 		{
-			if (TileMap[i][j] == 's')  s_map.setTextureRect(IntRect(32, 0, 32, 32));//если встретили символ s, то рисуем 2й квадратик
-			if ((TileMap[i][j] == '0')) s_map.setTextureRect(IntRect(64, 0, 32, 32));//если встретили символ 0, то рисуем 3й квадратик
+			if (TileMap[i][j] == 'B') rectangle.setFillColor(Color::Black);
 
+			if (TileMap[i][j] == '0')  rectangle.setFillColor(Color::Green);
 
-			s_map.setPosition(j * 32, i * 32);//по сути раскидывает квадратики, превращая в карту. то есть задает каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один квадрат
+			if (TileMap[i][j] == ' ') continue;
 
-			window.draw(s_map);//рисуем квадратики на экран
+			rectangle.setPosition(j * 32 - 0, i * 32 - 0);
+			window.draw(rectangle);
 		}
 }
 
@@ -161,7 +160,7 @@ void Game::update()
 
 
 
-		drawMap();
+		//drawMap();
 		updatePlayer();
 		updateCollision();
 	}
@@ -179,10 +178,72 @@ void Game::renderPlayer()
 
 void Game::render()
 {
+	const int H = 41;
+	const int W = 150;
+	Texture tileSet;
+	float offsetX = 0, offsetY = 0;
+	tileSet.loadFromFile("Texture/Mario_tileset.png");
+	Sprite tile(tileSet);
+	String TileMap[H] = {
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"P                                                                                                                                                     ",
+"P                 P                                                                                                                                   ",
+"P                 P                                           P                                   P                                                  P",
+"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+	};
+
+	window.clear();
+	for (int i = 0; i < H; i++)
+		for (int j = 0; j < W; j++)
+		{
+			if (TileMap[i][j] == 'P')  tile.setTextureRect(IntRect(143 - 16 * 3, 112, 16, 16));
+			if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
+
+			tile.setPosition(j * 16 - offsetX, i * 16 - offsetY);
+			window.draw(tile);
+		}
+
 	if (player->getHp() <= 0) {
 		
 		player->loseU();
 	}
+
 	renderPlayer();
 	updateHealth(); //test
 	window.display();

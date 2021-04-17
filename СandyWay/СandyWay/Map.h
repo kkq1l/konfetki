@@ -2,36 +2,24 @@
 #include "Header.h"
 
 
-const int HEIGHT_MAP = 25;//размер карты высота
-const int WIDTH_MAP = 40;//размер карты ширина 
-sf::String TileMap[HEIGHT_MAP] = {
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"                                        ",
-		"0                                       ",
-		"0                                      0",
-		"0                                      0",
-		"0                                      0",
-		"0             0                        0",
-		"0             0                        0",
-		"0000000000000000000000000000000000000000",
-};
+const int H = 12;
+const int W = 40;
+sf::String TileMap[H] = {
 
+"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+"B                                B     B",
+"B                                B     B",
+"B                                B     B",
+"B                                B     B",
+"B         0000                BBBB     B",
+"B                                B     B",
+"BBB                              B     B",
+"B              BB                BB    B",
+"B              BB                      B",
+"B    B         BB         BB           B",
+"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+
+};
 class Map
 {
 public:
