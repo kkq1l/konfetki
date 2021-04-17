@@ -40,6 +40,8 @@ public:
 	virtual ~Player();
 	sf::View view;
 
+	//test vzaimodeystvie s kartoy
+
 
 	sf::FloatRect rect;
 	bool onGround;

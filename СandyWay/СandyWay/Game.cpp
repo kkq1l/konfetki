@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Hud.h"
+#include "Map.h"
 #include<map>
 #include<string>
 #include<sstream>
@@ -8,8 +9,6 @@ using namespace sf;
 bool isMenu = 1;
 float x, y = 0;
 Hud lifeBarPlayer;//
-
-float dx, dy;
 
 void Game::initWindow()
 {
@@ -22,33 +21,40 @@ void Game::initPlayer()
 	player = new Player();
 }
 
-void Game::initVrags()
-{
-	spawnTimerMax = 50.f;
-	spawnTimer = spawnTimerMax;
-}
-
-void Game::initWorld()
-{
-	worldBackgroundTex.loadFromFile("Texture/world/back.png");
-	
-
-	worldBackground.setTexture(worldBackgroundTex);
-}
-
 Game::Game()
 {
+	initMap();
 	initWindow();
 	initPlayer();
-	initGUI();
-	lifeBarPlayer.update(player->getHp());//test
-	initVrags();
-	initWorld();
+	lifeBarPlayer.update(player->getHp());
 }
 
 Game::~Game()
 {
 	delete player;
+}
+
+void Game::initMap()
+{
+}
+
+void Game::drawMap()
+{
+
+	map_image.loadFromFile("images/map.png");
+	map.loadFromImage(map_image);
+	s_map.setTexture(map);
+	for (int i = 0; i < 25; i++)
+		for (int j = 0; j < 40; j++)
+		{
+			if (TileMap[i][j] == 's')  s_map.setTextureRect(IntRect(32, 0, 32, 32));//если встретили символ s, то рисуем 2й квадратик
+			if ((TileMap[i][j] == '0')) s_map.setTextureRect(IntRect(64, 0, 32, 32));//если встретили символ 0, то рисуем 3й квадратик
+
+
+			s_map.setPosition(j * 32, i * 32);//по сути раскидывает квадратики, превращая в карту. то есть задает каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один квадрат
+
+			window.draw(s_map);//рисуем квадратики на экран
+		}
 }
 
 void Game::updateHealth()
@@ -74,16 +80,6 @@ void Game::updateCollision()
 	}
 }
 
-void Game::updateWorld()
-{
-
-}
-
-void Game::initGUI()
-{
-
-	
-}
 void Game::update()
 {
 	Texture menuTexture0, menuTexture1, menuTexture2, menuTexture3, aboutTexture;
@@ -117,7 +113,9 @@ void Game::update()
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
 				if (menuNum == 1) {
-					isMenu = false; this->window.clear();
+					isMenu = false; 
+					this->window.clear();
+					player->view.reset(sf::FloatRect(0, 0, 1136, 640));
 				}
 				if (menuNum == 2) { window.draw(about); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
 				if (menuNum == 3) { window.close(); isMenu = false; }
@@ -159,9 +157,13 @@ void Game::update()
 			}
 		}
 
+
+
+
+
+		drawMap();
 		updatePlayer();
 		updateCollision();
-		updateWorld();
 	}
 }
 
@@ -177,128 +179,9 @@ void Game::renderPlayer()
 
 void Game::render()
 {
-	const int H = 41;
-	const int W = 150;
-	Texture tileSet;
-	float offsetX = 0, offsetY = 0;
-	tileSet.loadFromFile("Texture/Mario_tileset.png");
-	Sprite tile(tileSet);
-	String TileMap[H] = {
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"P                                                                                                                                                     ",
-"P                                                                                                                                                     ",
-"P                 P                                           P                                   P                                                  P",
-"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
-	};
-
-	bool onGround;
-	std::cout << player->getPosition().x<<std::endl;
-
-	FloatRect rect;
-	int num = 0;
-	rect = FloatRect(100, 180, 16, 16);
-	for (int i = rect.top / 16; i < (rect.top + rect.height) / 16; i++)
-		for (int j = rect.left / 16; j < (rect.left + rect.width) / 16; j++)
-		{
-			if ((TileMap[i][j] == 'P') || (TileMap[i][j] == 'k') || (TileMap[i][j] == '0') || (TileMap[i][j] == 'r') || (TileMap[i][j] == 't'))
-			{
-				if (dy > 0 && num == 1)
-				{
-					rect.top = i * 16 - rect.height;  dy = 0;   onGround = true;
-				}
-				if (dy < 0 && num == 1)
-				{
-					rect.top = i * 16 + 16;   dy = 0;
-				}
-				if (dx > 0 && num == 0)
-				{
-					rect.left = j * 16 - rect.width;
-				}
-				if (dx < 0 && num == 0)
-				{
-					rect.left = j * 16 + 16;
-				}
-			}
-
-			if (TileMap[i][j] == 'c') {
-				// TileMap[i][j]=' '; 
-			}
-		}
-
-	window.clear();
-//<<<<<<< HEAD
-	for (int i = 0; i < H; i++)
-		for (int j = 0; j < W; j++)
-		{
-			if (TileMap[i][j] == 'P')  tile.setTextureRect(IntRect(143 - 16 * 3, 112, 16, 16));
-
-			if (TileMap[i][j] == 'k')  tile.setTextureRect(IntRect(143, 112, 16, 16));
-
-			if (TileMap[i][j] == 'c')  tile.setTextureRect(IntRect(143 - 16, 112, 16, 16));
-
-			if (TileMap[i][j] == 't')  tile.setTextureRect(IntRect(0, 47, 32, 95 - 47));
-
-			if (TileMap[i][j] == 'g')  tile.setTextureRect(IntRect(0, 16 * 9 - 5, 3 * 16, 16 * 2 + 5));
-
-			if (TileMap[i][j] == 'G')  tile.setTextureRect(IntRect(145, 222, 222 - 145, 255 - 222));
-
-			if (TileMap[i][j] == 'd')  tile.setTextureRect(IntRect(0, 106, 74, 127 - 106));
-
-			if (TileMap[i][j] == 'w')  tile.setTextureRect(IntRect(99, 224, 140 - 99, 255 - 224));
-
-			if (TileMap[i][j] == 'r')  tile.setTextureRect(IntRect(143 - 32, 112, 16, 16));
-
-			if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
-
-			tile.setPosition(j * 16 - offsetX, i * 16 - offsetY);
-			window.draw(tile);
-		}
-
-	
-//=======
-	renderWorld();
-
-//>>>>>>> c8048320f964f0b986e1e31740d8bd3617ad0363
 	if (player->getHp() <= 0) {
 		
 		player->loseU();
-		window.draw(gameOverText);
 	}
 	renderPlayer();
 	updateHealth(); //test
@@ -310,7 +193,3 @@ const sf::RenderWindow& Game::getWindow() const
 	return window;
 }
 
-void Game::renderWorld()
-{
-	//window.draw(worldBackground);
-}

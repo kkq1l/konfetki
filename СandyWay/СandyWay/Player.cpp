@@ -9,7 +9,7 @@ void Player::initVariables()
 	this->hpMax = 100;
 	this->hp = this->hpMax;
 	
-
+	rect = sf::FloatRect(100, 180, 16, 16); //test
 }
 
 void Player::initTexture()
@@ -138,6 +138,7 @@ void Player::move(const float dir_x, const float dir_y)
 	if (std::abs(this->velocity.x) > this->velocityMax)
 	{
 		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f);
+		
 	}
 
 }
@@ -177,14 +178,13 @@ void Player::updateMovement()
 			{
 				this->move(-1.f, 0.f);
 				this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-				view.setCenter(getPosition().x, getPosition().y);
+					view.move(velocity.x-0.05,0);
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			{
 				this->move(1.f, 0.f);
 				this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-				view.setCenter(getPosition().x, getPosition().y);
-
+				view.move(velocity.x+0.05, 0);
 
 			}
 

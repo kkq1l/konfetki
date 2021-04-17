@@ -15,8 +15,6 @@ private:
 	sf::Font font;
 	sf::Text pointText;
 
-	sf::Text gameOverText;
-
 	Player* player;
 
 	float spawnTimer;
@@ -24,9 +22,7 @@ private:
 
 	void initWindow();
 	void initPlayer();
-	void initVrags();
-	void initWorld();
-	void initGUI();
+
 	sf::RectangleShape playerHpBar;
 	sf::RectangleShape playerHpBarBack;
 
@@ -36,10 +32,15 @@ private:
 public:
 
 
+	sf::Image map_image;
+	sf::Texture map;
+	sf::Sprite s_map;
 
 	Game();
 	virtual ~Game();
 
+	void initMap();
+	void drawMap();
 
 	void updateHealth();//test
 	void updatePlayer();
@@ -47,8 +48,6 @@ public:
 	void update();
 	void renderPlayer();
 	void render();
-	void updateWorld();
-	void renderWorld();
 	const sf::RenderWindow& getWindow() const;
 
 };

@@ -2,7 +2,6 @@
 
 TileMap::TileMap()
 {
-	//Initialize tilemap
 
 }
 
