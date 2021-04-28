@@ -1,5 +1,4 @@
 #include "Hud.h"
-int key=0;
 Hud::Hud()
 {
 	image.loadFromFile("Texture/life.png");
@@ -7,9 +6,9 @@ Hud::Hud()
 	t.loadFromImage(image);
 	s.setTexture(t);
 	s.setTextureRect(IntRect(783, 2, 15, 84));
-
 	bar.setFillColor(Color(0, 0, 0));
 	max = 100;
+	key = 0;
 }
 
 void Hud::initGUI()
@@ -21,6 +20,11 @@ void Hud::initGUI()
 	gameOverText.setFillColor(sf::Color::Red);
 	gameOverText.setString("Game Over!");
 	gameOverText.setPosition(555, 300);
+}
+
+void Hud::Reset()
+{
+	key = 0;
 }
 
 void Hud::update(int k)
@@ -41,7 +45,7 @@ void Hud::draw(RenderWindow& window)
 	Vector2f center = window.getView().getCenter();
 	Vector2f size = window.getView().getSize();
 	if (key == 1) {
-		font.loadFromFile("Fonts/PixellettersFull.ttf");
+		font.loadFromFile("Texture/Fonts/PixellettersFull.ttf");
 
 		gameOverText.setFont(font);
 		gameOverText.setCharacterSize(60);

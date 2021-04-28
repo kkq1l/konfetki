@@ -25,6 +25,7 @@ Game::Game()
 	initMap();
 	initWindow();
 	initPlayer();
+	gaming = false;
 	lifeBarPlayer.update(player->getHp());
 }
 
@@ -67,7 +68,9 @@ void Game::update()
 	Texture menuTexture0, menuTexture1, menuTexture2, menuTexture3, aboutTexture;
 	menuTexture0.loadFromFile("Texture/menu/menu.png");
 	menuTexture1.loadFromFile("Texture/menu/btnplay.png");
-	menuTexture2.loadFromFile("Texture/menu/btnplay.png");
+	if (gaming == true) {
+		menuTexture2.loadFromFile("Texture/menu/btnplay.png");
+	}
 	menuTexture3.loadFromFile("Texture/menu/btnquit.png");
 	aboutTexture.loadFromFile("Texture/menu/menu.png");
 
@@ -95,11 +98,19 @@ void Game::update()
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
 				if (menuNum == 1) {
-					isMenu = false; 
+
+					player->NewGame();
+					isMenu = false;
 					this->window.clear();
 					player->view.reset(sf::FloatRect(0, 0, 1136, 640));
 				}
-				if (menuNum == 2) { window.draw(about); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
+				//if (menuNum == 2) { window.draw(about); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
+				if (menuNum == 2) {
+
+					player->view.reset(sf::FloatRect(viewX + 0.6, 0, 1136, 640));
+					isMenu = false;
+					this->window.clear();
+				}
 				if (menuNum == 3) { window.close(); isMenu = false; }
 
 			}
@@ -122,7 +133,10 @@ void Game::update()
 			else if (ev.type == sf::Event::KeyPressed && ev.key.code == sf::Keyboard::Escape)
 			{
 				player->view.reset(sf::FloatRect(0, 0, 1136, 640));
+				viewX = player->getPosition().x;
+				viewY = player->getPosition().y;
 				window.clear();
+				gaming = true;
 				isMenu = true;
 			}
 
@@ -140,7 +154,7 @@ void Game::update()
 		}
 
 
-
+		std::cout << player->getPosition().y << std::endl;
 
 
 		//drawMap();
@@ -165,7 +179,7 @@ void Game::render()
 	const int W = 150;
 	Texture tileSet;
 	float offsetX = 0, offsetY = 0;
-	tileSet.loadFromFile("Texture/Mario_tileset.png");
+	tileSet.loadFromFile("Texture/tileset.png");
 	Sprite tile(tileSet);
 	String TileMap[H] = {
 "                                                                                                                                                      ",
