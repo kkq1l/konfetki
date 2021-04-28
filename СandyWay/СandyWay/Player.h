@@ -12,7 +12,8 @@ private:
 	Hud* hudd;
 	int hp;
 	int hpMax;
-	int loseGame=0;
+	int onGround = 1;
+	int loseGame = 0;
 	//Animation
 	sf::IntRect currentFrame;
 	bool animationSwitch;
@@ -44,7 +45,6 @@ public:
 
 	void NewGame();
 	sf::FloatRect rect;
-	bool onGround;
 	float dx, dy;
 	bool yaStolknulsya;
 

@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "Hud.h"
-#include "Map.h"
 #include<map>
 #include<string>
 #include<sstream>
@@ -39,23 +38,7 @@ void Game::initMap()
 {
 }
 
-void Game::drawMap()
-{
-	RectangleShape rectangle(Vector2f(32, 32));
 
-	for (int i = 0; i < H; i++)
-		for (int j = 0; j < W; j++)
-		{
-			if (TileMap[i][j] == 'B') rectangle.setFillColor(Color::Black);
-
-			if (TileMap[i][j] == '0')  rectangle.setFillColor(Color::Green);
-
-			if (TileMap[i][j] == ' ') continue;
-
-			rectangle.setPosition(j * 32 - 0, i * 32 - 0);
-			window.draw(rectangle);
-		}
-}
 
 void Game::updateHealth()
 {
@@ -227,9 +210,25 @@ void Game::render()
 "                                                                                                                                                      ",
 "                                                                                                                                                      ",
 "                                                                                                                                                      ",
+<<<<<<< HEAD
 "                                                                      P                                                                               ",
 "                    P                                                 P                                                                               ",
 "                    P                                                 P                                                                               ",
+=======
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"                                                                                                                                                      ",
+"P                 p                                                                                                                                   ",
+"P                 P                                                                               p                                                   ",
+"P                 P                                           P                                   P                                                  P",
+"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+>>>>>>> 94c6e3bf636ca6d214f5c3890071f49c9636469d
 	};
 
 	window.clear();

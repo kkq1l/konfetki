@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
-
 #include "Game.h"
+
 float centerWindow = 1366/2;
 void Player::initVariables()
 {
@@ -10,6 +10,7 @@ void Player::initVariables()
 	this->hp = this->hpMax;
 	setPosition(0,490);
 	loseGame = 0;
+	onGround = 1;
 	stopJump = 0;
 	yaStolknulsya = false;
 }
@@ -100,6 +101,7 @@ const int& Player::getHpMax() const
 void Player::setPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
+	onGround = 1;
 }
 
 void Player::resetVelocityY()
@@ -182,7 +184,7 @@ void Player::updatePhysics()
 
 	
 	this->sprite.move(this->velocity);
-
+	
 
 
 }
@@ -196,7 +198,7 @@ void Player::updateMovement()
 	else {
 		this->animState = PLAYER_ANIMATION_STATES::DEAD;
 	}
-		if (loseGame == 0) {
+		if ((loseGame == 0)&&(onGround == 1)) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 			{
 				this->move(-1.f, 0.f);
@@ -211,11 +213,13 @@ void Player::updateMovement()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 			{
-				this->move(0.f, 1.f);
+				this->move(0.f, 2.f);
+				onGround = 0;
 				this->animState = PLAYER_ANIMATION_STATES::JUMPING;
 
 			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 			{
 				this->sprite.move(0.f, 1.f);
 				this->loseHp(1);
@@ -279,11 +283,24 @@ void Player::updateAnimations()
 			this->currentFrame.left += 40.f;
 			if (this->currentFrame.left > 360.f)
 				this->currentFrame.left = 0;
-			this->sprite.setScale(3.f, 3.f);
-			this->sprite.setOrigin(0.f, 0.f);
+			{
+				if (this->animState == PLAYER_ANIMATION_STATES::MOVING_LEFT)
+				{
+					this->sprite.setScale(-3.f, 3.f);
+					this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 3.f, 0.f);
+				}
+				if (this->animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
+				{
+					this->sprite.setScale(3.f, 3.f);
+					this->sprite.setOrigin(0.f, 0.f);
+				}
+				if (this->animState == PLAYER_ANIMATION_STATES::IDLE)
+				{
+					this->sprite.setTextureRect(this->currentFrame);
+				}
+			}
 		}
-		this->sprite.setScale(3.f, 3.f);
-		this->sprite.setOrigin(0.f, 0.f);
+		
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::DEAD)
 	{
