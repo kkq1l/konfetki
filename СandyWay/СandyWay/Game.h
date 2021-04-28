@@ -40,7 +40,6 @@ public:
 	virtual ~Game();
 
 	void initMap();
-	void drawMap();
 
 	void updateHealth();//test
 	void updatePlayer();
