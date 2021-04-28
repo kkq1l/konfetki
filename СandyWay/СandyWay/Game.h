@@ -35,7 +35,6 @@ public:
 	sf::Image map_image;
 	sf::Texture map;
 	sf::Sprite s_map;
-
 	bool gaming;
 	Game();
 	virtual ~Game();

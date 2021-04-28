@@ -11,7 +11,7 @@ void Player::initVariables()
 	setPosition(0,490);
 	loseGame = 0;
 	stopJump = 0;
-	rect = sf::FloatRect(100, 180, 16, 16); //test
+	yaStolknulsya = false;
 }
 
 void Player::initTexture()
@@ -141,25 +141,21 @@ void Player::resetAnimationTimer()
 
 void Player::move(const float dir_x, const float dir_y)
 {
-	this->velocity.x += dir_x * this->acceleration;
-	this->velocity.y += dir_y *5.0f;
-	std::cout << velocity.x << std::endl;
-	if (std::abs(this->velocity.x) > this->velocityMax)
-	{
-		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f);
-		view.move(velocity.x-((this->velocity.x < 0.f) ? -1.6 : 1.6), 0);
-	}
-	if (stopJump == 0 && velocity.y>4) {
-
-		std::cout << velocity.y << " " << velocityMaxY << " " << stopJump << std::endl;
-
-		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? 2.f : -2.f);
-		if (abs(this->velocity.y) > 10.0f) {
-			std::cout <<  "alooo "  << std::endl;
-			stopJump = 1;
+	if (yaStolknulsya == false) {
+		this->velocity.x += dir_x * this->acceleration;
+		this->velocity.y += dir_y * 5.0f;
+		if (std::abs(this->velocity.x) > this->velocityMax)
+		{
+			this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f);
+			view.move(velocity.x - ((this->velocity.x < 0.f) ? -1.6 : 1.6), 0);
+		}
+		if (stopJump == 0 && velocity.y > 4) {
+			this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? 2.f : -2.f);
+			if (abs(this->velocity.y) > 10.0f) {
+				stopJump = 1;
+			}
 		}
 	}
-
 }
 
 void Player::updatePhysics()

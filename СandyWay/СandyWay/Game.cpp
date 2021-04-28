@@ -192,10 +192,10 @@ void Game::renderPlayer()
 
 void Game::render()
 {
-	const int H = 41;
+	const int H = 31;
 	const int W = 150;
 	Texture tileSet;
-	float offsetX = 0, offsetY = 0;
+	float offsetX = 20, offsetY = -150;
 	tileSet.loadFromFile("Texture/tileset.png");
 	Sprite tile(tileSet);
 	String TileMap[H] = {
@@ -227,19 +227,9 @@ void Game::render()
 "                                                                                                                                                      ",
 "                                                                                                                                                      ",
 "                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"P                                                                                                                                                     ",
-"P                 P                                                                                                                                   ",
-"P                 P                                           P                                   P                                                  P",
-"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+"                                                                      P                                                                               ",
+"                    P                                                 P                                                                               ",
+"                    P                                                 P                                                                               ",
 	};
 
 	window.clear();
@@ -248,9 +238,23 @@ void Game::render()
 		{
 			if (TileMap[i][j] == 'P')  tile.setTextureRect(IntRect(143 - 16 * 3, 112, 16, 16));
 			if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
-
-			tile.setPosition(j * 16 - offsetX, i * 16 - offsetY);
+			tile.setPosition(j*16  - offsetX, i*16  - offsetY);
 			window.draw(tile);
+		}
+	for (int i = player->getPosition().y / 16; i < (player->getPosition().y + player->rect.width) / 16; i++)
+		for (int j = player->getPosition().x / 16; j < (player->getPosition().x + player->rect.width) / 16; j++)
+		{
+			std::cout << player->getPosition().x/16 <<" "<< player->getPosition().y/ 16 <<" Y:"<< i<<" X:"<<j <<" "<< TileMap[i][j] << std::endl;
+			if (TileMap[i][j] == 'P')
+			{
+				std::cout << "Test B: " << TileMap[i][j] << std::endl;
+			}
+
+			if (TileMap[i][j] == '0')
+			{
+				TileMap[i][j] = ' ';
+			}
+
 		}
 
 	if (player->getHp() <= 0) {
