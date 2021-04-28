@@ -16,13 +16,13 @@ private:
 	sf::Text pointText;
 
 	Player* player;
-
+	Hud* huddd;
 	float spawnTimer;
 	float spawnTimerMax;
-
 	void initWindow();
 	void initPlayer();
 
+	int viewX, viewY;
 	sf::RectangleShape playerHpBar;
 	sf::RectangleShape playerHpBarBack;
 
@@ -36,9 +36,9 @@ public:
 	sf::Texture map;
 	sf::Sprite s_map;
 
+	bool gaming;
 	Game();
 	virtual ~Game();
-
 	void initMap();
 	void drawMap();
 

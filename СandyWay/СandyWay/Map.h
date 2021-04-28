@@ -23,9 +23,5 @@ sf::String TileMap[H] = {
 class Map
 {
 public:
-
-
-	
-
 };
 

@@ -5,6 +5,8 @@
 using namespace sf;
 class Hud
 {
+private:
+
 public:
 
 	sf::Text gameOverText;
@@ -13,12 +15,13 @@ public:
 	Texture t;
 	Sprite s;
 	int max;
+	int key=0;
 	RectangleShape bar;
 
 	Hud();
 
 	void initGUI();
-
+	void Reset();
 	void update(int k);
 	void draw(RenderWindow& window);
 };

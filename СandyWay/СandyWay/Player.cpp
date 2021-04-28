@@ -8,7 +8,9 @@ void Player::initVariables()
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
 	this->hpMax = 100;
 	this->hp = this->hpMax;
-	
+	setPosition(0,490);
+	loseGame = 0;
+	stopJump = 0;
 	rect = sf::FloatRect(100, 180, 16, 16); //test
 }
 
@@ -57,6 +59,12 @@ Player::Player()
 Player::~Player()
 {
 
+}
+
+void Player::NewGame()
+{
+	this->initVariables();
+	this->loseHp(1);
 }
 
 const bool& Player::getAnimSwitch()
@@ -134,11 +142,22 @@ void Player::resetAnimationTimer()
 void Player::move(const float dir_x, const float dir_y)
 {
 	this->velocity.x += dir_x * this->acceleration;
-
+	this->velocity.y += dir_y *5.0f;
+	std::cout << velocity.x << std::endl;
 	if (std::abs(this->velocity.x) > this->velocityMax)
 	{
 		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f);
 		view.move(velocity.x-((this->velocity.x < 0.f) ? -1.6 : 1.6), 0);
+	}
+	if (stopJump == 0 && velocity.y>4) {
+
+		std::cout << velocity.y << " " << velocityMaxY << " " << stopJump << std::endl;
+
+		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? 2.f : -2.f);
+		if (abs(this->velocity.y) > 10.0f) {
+			std::cout <<  "alooo "  << std::endl;
+			stopJump = 1;
+		}
 	}
 
 }
@@ -155,9 +174,17 @@ void Player::updatePhysics()
 
 	if (std::abs(this->velocity.x) < this->velocityMin)
 		this->velocity.x = 0.f;
-	if (std::abs(this->velocity.y) < this->velocityMin)
+	if (std::abs(this->velocity.y) < this->velocityMin) 
 		this->velocity.y = 0.f;
+	if (stopJump==1) {
+		if (std::abs(this->velocity.y) < 2.0f) {
+			std::cout << "alooo 2" << std::endl;
+			stopJump = 0;
+		}
+	}
+	
 
+	
 	this->sprite.move(this->velocity);
 
 
@@ -188,8 +215,8 @@ void Player::updateMovement()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 			{
-				this->move(0.f, -1.f);
-				//this->animState = PLAYER_ANIMATION_STATES::JUMPING;
+				this->move(0.f, 1.f);
+				this->animState = PLAYER_ANIMATION_STATES::JUMPING;
 
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))

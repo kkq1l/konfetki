@@ -1,6 +1,6 @@
 #pragma once
 #include "Header.h"
-
+#include "Hud.h"
 enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING,DEAD };
 
 class Player
@@ -9,14 +9,14 @@ private:
 	sf::Sprite sprite;
 	sf::Texture textureSheet;
 	sf::Clock animationTimer;
-
+	Hud* hudd;
 	int hp;
 	int hpMax;
 	int loseGame=0;
 	//Animation
 	sf::IntRect currentFrame;
 	bool animationSwitch;
-
+	bool stopJump;
 	//Physics
 	sf::Vector2f velocity;
 	float velocityMax;
@@ -42,7 +42,7 @@ public:
 
 	//test vzaimodeystvie s kartoy
 
-
+	void NewGame();
 	sf::FloatRect rect;
 	bool onGround;
 	float dx, dy;
