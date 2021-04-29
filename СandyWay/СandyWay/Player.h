@@ -46,7 +46,7 @@ public:
 	void NewGame();
 	sf::FloatRect rect;
 	float dx, dy;
-
+	bool yaStolknulsya;
 
 	const bool& getAnimSwitch();
 	const sf::Vector2f getPosition() const;
