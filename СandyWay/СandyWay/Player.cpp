@@ -45,7 +45,7 @@ void Player::initPhysics()
 	this->acceleration = 3.0f;
 	this->drag = 0.85f;
 	this->gravity = 4.f;
-	this->velocityMaxY = 15.f;
+	this->velocityMaxY = 30.f;
 }
 
 Player::Player()
@@ -217,7 +217,7 @@ void Player::updateMovement()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 			{
-				this->move(0.f, 2.f);
+				this->move(0.f, 1.f);
 				onGround = 0;
 				this->animState = PLAYER_ANIMATION_STATES::JUMPING;
 
@@ -281,28 +281,14 @@ void Player::updateAnimations()
 	}
 	else if (this->animState == PLAYER_ANIMATION_STATES::JUMPING)
 	{
-		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.1f || this->getAnimSwitch())
+		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.2f || this->getAnimSwitch())
 		{
-			this->currentFrame.top = 50.f;
+			this->currentFrame.top = 100.f;
 			this->currentFrame.left += 40.f;
-			if (this->currentFrame.left > 360.f)
+			if (this->currentFrame.left > 160.f)
 				this->currentFrame.left = 0;
-			{
-				if (this->animState == PLAYER_ANIMATION_STATES::MOVING_LEFT)
-				{
-					this->sprite.setScale(-3.f, 3.f);
-					this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 3.f, 0.f);
-				}
-				if (this->animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
-				{
-					this->sprite.setScale(3.f, 3.f);
-					this->sprite.setOrigin(0.f, 0.f);
-				}
-				if (this->animState == PLAYER_ANIMATION_STATES::IDLE)
-				{
-					this->sprite.setTextureRect(this->currentFrame);
-				}
-			}
+			this->animationTimer.restart();
+			this->sprite.setTextureRect(this->currentFrame);
 		}
 		
 	}

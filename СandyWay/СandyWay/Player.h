@@ -1,7 +1,7 @@
 #pragma once
 #include "Header.h"
 #include "Hud.h"
-enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING,DEAD };
+enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING, DEAD };
 
 class Player
 {
