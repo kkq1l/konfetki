@@ -147,7 +147,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>

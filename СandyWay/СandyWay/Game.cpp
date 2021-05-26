@@ -65,6 +65,9 @@ void Game::updateCollision()
 
 void Game::update()
 {
+	Texture background;
+	background.loadFromFile("Texture/bcg.png");
+	Sprite bcg(background);
 	Texture menuTexture0, menuTexture1, menuTexture2, menuTexture3, aboutTexture;
 	menuTexture0.loadFromFile("Texture/menu/menu.png");
 	menuTexture1.loadFromFile("Texture/menu/btnplay.png");
@@ -103,6 +106,7 @@ void Game::update()
 					isMenu = false;
 					this->window.clear();
 					player->view.reset(sf::FloatRect(0, 0, 1136, 640));
+
 				}
 				//if (menuNum == 2) { window.draw(about); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
 				if (menuNum == 2) {
@@ -123,10 +127,10 @@ void Game::update()
 		}
 	}
 	if (isMenu==false) {
-		window.draw(menu0);
 
 		while (window.pollEvent(ev))
 		{
+			window.draw(bcg);
 
 			if (ev.type == sf::Event::Closed)
 				window.close();
@@ -138,6 +142,7 @@ void Game::update()
 				window.clear();
 				gaming = true;
 				isMenu = true;
+
 			}
 
 
@@ -150,7 +155,11 @@ void Game::update()
 				)
 			{
 				player->resetAnimationTimer();
+
 			}
+
+
+			window.display();
 		}
 
 
@@ -178,6 +187,7 @@ void Game::render()
 	const int H = 31;
 	const int W = 150;
 	Texture tileSet;
+	
 	float offsetX = 20, offsetY = -150;
 	tileSet.loadFromFile("Texture/tileset.png");
 	Sprite tile(tileSet);
@@ -210,25 +220,9 @@ void Game::render()
 "                                                                                                                                                      ",
 "                                                                                                                                                      ",
 "                                                                                                                                                      ",
-<<<<<<< HEAD
 "                                                                      P                                                                               ",
 "                    P                                                 P                                                                               ",
 "                    P                                                 P                                                                               ",
-=======
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"P                 p                                                                                                                                   ",
-"P                 P                                                                               p                                                   ",
-"P                 P                                           P                                   P                                                  P",
-"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
->>>>>>> 94c6e3bf636ca6d214f5c3890071f49c9636469d
 	};
 
 	window.clear();
