@@ -8,6 +8,44 @@ using namespace sf;
 bool isMenu = 1;
 float x, y = 0;
 Hud lifeBarPlayer;//
+const int H = 30;
+const int W = 150;
+Texture tileSet;
+float offsetX = 0, offsetY = 0;
+Sprite tile(tileSet);
+String TileMap[H] = {
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                                                                      ",
+	"                                                                                                  S                                                   ",
+	"                                                              S                                   S                                                  P",
+	"                  PPPPPPPPPPPPPPPPPPPGGGGGGGGGGPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP" };
+
+
 
 void Game::initWindow()
 {
@@ -22,7 +60,6 @@ void Game::initPlayer()
 
 Game::Game()
 {
-	initMap();
 	initWindow();
 	initPlayer();
 	gaming = false;
@@ -34,8 +71,24 @@ Game::~Game()
 	delete player;
 }
 
-void Game::initMap()
+void Game::mapGener()
 {
+	tileSet.loadFromFile("Texture/tileset.png");
+	std::cout << "asd" << std::endl;
+	for (int i = 0; i < H; i++) {
+		for (int j = 0; j < W; j++)
+		{
+			if (TileMap[i][j] == 'P')  tile.setTextureRect(IntRect(143 - 16 * 3, 112, 32, 32));
+			if (TileMap[i][j] == 'S')  tile.setTextureRect(IntRect(143 - 16 * 3, 112, 32, 32));
+			if (TileMap[i][j] == 'G')  tile.setTextureRect(IntRect(143 - 16 * 3, 112, 16, 16));
+			if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
+
+			tile.setPosition(j * 16 - offsetX, i * 16 - offsetY);
+			window.draw(tile);
+		}
+	}
+
+
 }
 
 
@@ -53,14 +106,55 @@ void Game::updatePlayer()
 
 void Game::updateCollision()
 {
-	if (player->getPosition().y + player->getGlobalBounds().height > window.getSize().y)
-	{
-		player->resetVelocityY();
-		player->setPosition(
-			player->getPosition().x,
-			window.getSize().y - player->getGlobalBounds().height
-		);
-	}
+	
+
+
+	for (int i = (player->getPosition().y / 16); i < ((player->getPosition().y + player->getGlobalBounds().height) / 16); i++)
+		for (int j = (player->getPosition().x / 16); j < ((player->getPosition().x + player->getGlobalBounds().width) / 16); j++)
+		{
+			std::cout << "Pos po X: "<<player->getPosition().x / 16 << " Pos po Y: " << player->getPosition().y / 16 << " X:" << i << " Y:" << j << " "<< player->getGlobalBounds().height << TileMap[i][j] << std::endl;
+			if (TileMap[i][j] == 80)
+			{
+				
+
+				//if (player->getPosition().y + player->getGlobalBounds().height > window.getSize().y){
+				player->resetVelocityY();
+				player->setPosition(
+					player->getPosition().x,
+					i*16 - (player->getGlobalBounds().height)
+						);
+					//}
+			}
+
+			if (TileMap[i][j] == 'S' && player->velocity.x>0.f)
+			{
+				
+				player->setPosition(
+					j*16-player->getGlobalBounds().width,
+					i * 16
+				);
+			}
+			if (TileMap[i][j] == 'S' && player->velocity.x < 0.f)
+			{
+				player->setPosition(
+					j * 16,
+					i * 16
+				);
+			}
+			if (TileMap[i][j] == 'G')
+			{
+				TileMap[i][j] = '0';
+			}
+			if (player->getPosition().y + player->getGlobalBounds().height > (window.getSize().y)+70)
+			{
+				player->setPosition(
+					player->getPosition().x,
+					(window.getSize().y - player->getGlobalBounds().height)+70
+				);
+
+				player->loseHp(100);
+			}
+		}
 }
 
 void Game::update()
@@ -68,9 +162,6 @@ void Game::update()
 	Texture menuTexture0, menuTexture1, menuTexture2, menuTexture3, aboutTexture;
 	menuTexture0.loadFromFile("Texture/menu/menu.png");
 	menuTexture1.loadFromFile("Texture/menu/btnplay.png");
-	if (gaming == true) {
-		menuTexture2.loadFromFile("Texture/menu/btnplay.png");
-	}
 	menuTexture3.loadFromFile("Texture/menu/btnquit.png");
 	aboutTexture.loadFromFile("Texture/menu/menu.png");
 
@@ -152,12 +243,6 @@ void Game::update()
 				player->resetAnimationTimer();
 			}
 		}
-
-
-		std::cout << player->getPosition().y << std::endl;
-
-
-		//drawMap();
 		updatePlayer();
 		updateCollision();
 	}
@@ -175,67 +260,10 @@ void Game::renderPlayer()
 
 void Game::render()
 {
-	const int H = 41;
-	const int W = 150;
-	Texture tileSet;
-	float offsetX = 0, offsetY = 0;
-	tileSet.loadFromFile("Texture/tileset.png");
-	Sprite tile(tileSet);
-	String TileMap[H] = {
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"                                                                                                                                                      ",
-"P                 p                                                                                                                                   ",
-"P                 P                                                                               p                                                   ",
-"P                 P                                           P                                   P                                                  P",
-"PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
-	};
-
+	
 	window.clear();
-	for (int i = 0; i < H; i++)
-		for (int j = 0; j < W; j++)
-		{
-			if (TileMap[i][j] == 'P')  tile.setTextureRect(IntRect(143 - 16 * 3, 112, 16, 16));
-			if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
 
-			tile.setPosition(j * 16 - offsetX, i * 16 - offsetY);
-			window.draw(tile);
-		}
-
+	mapGener();
 	if (player->getHp() <= 0) {
 		
 		player->loseU();

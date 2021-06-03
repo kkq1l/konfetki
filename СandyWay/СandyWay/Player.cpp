@@ -3,16 +3,16 @@
 #include "Game.h"
 
 float centerWindow = 1366/2;
+
 void Player::initVariables()
 {
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
 	this->hpMax = 100;
 	this->hp = this->hpMax;
-	setPosition(0,490);
+	setPosition(220,250);
 	loseGame = 0;
 	onGround = 1;
-	stopJump = 0;
-	rect = sf::FloatRect(100, 180, 16, 16); //test
+	stopJump = 1;
 }
 
 void Player::initTexture()
@@ -124,11 +124,6 @@ void Player::loseHp(const int value)
 	this->hp -= value;
 	if (this->hp < 0) {
 		this->hp = 0;
-		std::cout << hp << std::endl;
-	}
-	else {
-
-		std::cout << hp << std::endl;
 	}
 }
 
@@ -145,20 +140,15 @@ void Player::move(const float dir_x, const float dir_y)
 {
 	this->velocity.x += dir_x * this->acceleration;
 	this->velocity.y += dir_y *5.0f;
-	std::cout << velocity.x << std::endl;
 	if (std::abs(this->velocity.x) > this->velocityMax)
 	{
 		this->velocity.x = this->velocityMax * ((this->velocity.x < 0.f) ? -1.f : 1.f);
 		view.move(velocity.x-((this->velocity.x < 0.f) ? -1.6 : 1.6), 0);
 	}
-	if (stopJump == 0 && velocity.y>4) {
-
-		std::cout << velocity.y << " " << velocityMaxY << " " << stopJump << std::endl;
-
+	if (stopJump == 1 && velocity.y>4) {
 		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? 2.f : -2.f);
 		if (abs(this->velocity.y) > 10.0f) {
-			std::cout <<  "alooo "  << std::endl;
-			stopJump = 1;
+			stopJump = 0;
 		}
 	}
 
@@ -166,8 +156,10 @@ void Player::move(const float dir_x, const float dir_y)
 
 void Player::updatePhysics()
 {
-	this->velocity.y += 1.0 * this->gravity;
-	if (std::abs(this->velocity.x) > this->velocityMaxY)
+	if (stopJump == 1) {
+		this->velocity.y += 1.0 * this->gravity;
+	}
+	if (std::abs(this->velocity.y) > this->velocityMaxY)
 	{
 		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0.f) ? -1.f : 1.f);
 	}
@@ -178,10 +170,9 @@ void Player::updatePhysics()
 		this->velocity.x = 0.f;
 	if (std::abs(this->velocity.y) < this->velocityMin) 
 		this->velocity.y = 0.f;
-	if (stopJump==1) {
+	if (stopJump==0) {
 		if (std::abs(this->velocity.y) < 2.0f) {
-			std::cout << "alooo 2" << std::endl;
-			stopJump = 0;
+			stopJump = 1;
 		}
 	}
 	

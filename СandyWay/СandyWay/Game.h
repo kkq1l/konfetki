@@ -39,8 +39,7 @@ public:
 	bool gaming;
 	Game();
 	virtual ~Game();
-	void initMap();
-
+	void mapGener();
 	void updateHealth();//test
 	void updatePlayer();
 	void updateCollision();
